@@ -1,0 +1,445 @@
+
+// Copyright (c) 2020 Paul Raffer.
+// Distributed under the Boost Software License, Version 1.0.
+// (See accompanying file LICENSE_1_0.txt or copy at
+// https://www.boost.org/LICENSE_1_0.txt)
+
+TYPE <r> IS [ABCDEHL]
+TYPE <n> IS #?HexByte[hH]?
+TYPE <nn> IS #?HexByteHexByte[hH]?
+TYPE <ss> IS \d
+
+
+<Z80 instructions>
+
+	<8 Bit Arithmethic Group>
+	
+		FUNC ADD__A_,_A IS 87
+		FUNC ADD__A_,_B IS 80
+		FUNC ADD__A_,_C IS 81
+		FUNC ADD__A_,_D IS 82
+		FUNC ADD__A_,_E IS 83
+		FUNC ADD__A_,_H IS 84
+		FUNC ADD__A_,_L IS 85
+
+		FUNC ADD__A_,_<n> IS C6 $1
+
+		FUNC ADD__A_,_\(HL\) IS 86
+
+		FUNC ADC__A_,_A IS 8F
+		FUNC ADC__A_,_B IS 88
+		FUNC ADC__A_,_C IS 89
+		FUNC ADC__A_,_D IS 8A
+		FUNC ADC__A_,_E IS 8B
+		FUNC ADC__A_,_H IS 8C
+		FUNC ADC__A_,_L IS 8D
+
+		FUNC ADC__A_,_<n> IS CE $1
+
+		FUNC ADC__A_,_\(HL\) IS 8E
+		
+		FUNC SUB__A_,_A IS 97
+		FUNC SUB__A_,_B IS 90
+		FUNC SUB__A_,_C IS 91
+		FUNC SUB__A_,_D IS 92
+		FUNC SUB__A_,_E IS 93
+		FUNC SUB__A_,_H IS 94
+		FUNC SUB__A_,_L IS 95
+
+		FUNC SUB__A_,_<n> IS D6 $1
+
+		FUNC SUB__A_,_\(HL\) IS 96
+		
+		FUNC SUBC__A_,_A IS 9F
+		FUNC SUBC__A_,_B IS 98
+		FUNC SUBC__A_,_C IS 99
+		FUNC SUBC__A_,_D IS 9A
+		FUNC SUBC__A_,_E IS 9B
+		FUNC SUBC__A_,_H IS 9C
+		FUNC SUBC__A_,_L IS 9D
+
+		FUNC SUBC__A_,_<n> IS DE $1
+
+		FUNC SUBC__A_,_\(HL\) IS 9E
+		
+	</8 Bit Arithmethic Group>
+	
+	
+	<16 Bit Arithmethic Group>
+		
+		FUNC ADD__HL_,_BC IS 09
+		FUNC ADD__HL_,_DE IS 19
+		FUNC ADD__HL_,_HL IS 29
+		FUNC ADD__HL_,_SP IS 39
+		
+		FUNC INC__BC IS 03
+		FUNC INC__DE IS 13
+		FUNC INC__HL IS 23
+		FUNC INC__SP IS 33
+		
+		FUNC DEC__BC IS 0B
+		FUNC DEC__DE IS 1B
+		FUNC DEC__HL IS 2B
+		FUNC DEC__SP IS 3B
+		
+		FUNC ADC__BC IS 4A
+		FUNC ADC__DE IS 5A
+		FUNC ADC__HL IS 6A
+		FUNC ADC__SP IS 7A
+		
+	</16 Bit Arithmethic Group>
+	
+	
+	<Input and Output Group>
+	
+		FUNC IN__A_,_\(<n>\) IS DB $1
+		
+		FUNC OUT__\(<n>\)_,_A IS D3 $1
+	
+	</Input and Output Group>
+	
+	
+	<8 Bit Load Group>
+	
+		FUNC LD__A_,_A IS 7F
+		FUNC LD__B_,_A IS 47
+		FUNC LD__C_,_A IS 4F
+		FUNC LD__D_,_A IS 57
+		FUNC LD__E_,_A IS 5F
+		FUNC LD__H_,_A IS 67
+		FUNC LD__L_,_A IS 6F
+		
+		FUNC LD__A_,_B IS 78
+		FUNC LD__B_,_B IS 40
+		FUNC LD__C_,_B IS 48
+		FUNC LD__D_,_B IS 50
+		FUNC LD__E_,_B IS 58
+		FUNC LD__H_,_B IS 60
+		FUNC LD__L_,_B IS 68
+		
+		FUNC LD__A_,_C IS 79
+		FUNC LD__B_,_C IS 41
+		FUNC LD__C_,_C IS 49
+		FUNC LD__D_,_C IS 51
+		FUNC LD__E_,_C IS 59
+		FUNC LD__H_,_C IS 61
+		FUNC LD__L_,_C IS 69
+		
+		FUNC LD__A_,_D IS 7A
+		FUNC LD__B_,_D IS 42
+		FUNC LD__C_,_D IS 4A
+		FUNC LD__D_,_D IS 52
+		FUNC LD__E_,_D IS 5A
+		FUNC LD__H_,_D IS 62
+		FUNC LD__L_,_D IS 6A
+		
+		FUNC LD__A_,_E IS 7B
+		FUNC LD__B_,_E IS 43
+		FUNC LD__C_,_E IS 4B
+		FUNC LD__D_,_E IS 53
+		FUNC LD__E_,_E IS 5B
+		FUNC LD__H_,_E IS 63
+		FUNC LD__L_,_E IS 6B
+		
+		FUNC LD__A_,_H IS 7C
+		FUNC LD__B_,_H IS 44
+		FUNC LD__C_,_H IS 4C
+		FUNC LD__D_,_H IS 54
+		FUNC LD__E_,_H IS 5C
+		FUNC LD__H_,_H IS 64
+		FUNC LD__L_,_H IS 6C
+		
+		FUNC LD__A_,_L IS 7D
+		FUNC LD__B_,_L IS 45
+		FUNC LD__C_,_L IS 4D
+		FUNC LD__D_,_L IS 55
+		FUNC LD__E_,_L IS 5D
+		FUNC LD__H_,_L IS 65
+		FUNC LD__L_,_L IS 6D
+		
+		FUNC LD__A_,_<n> IS 3E $1
+		FUNC LD__B_,_<n> IS 06 $1
+		FUNC LD__C_,_<n> IS 0E $1
+		FUNC LD__D_,_<n> IS 16 $1
+		FUNC LD__E_,_<n> IS 1E $1
+		FUNC LD__H_,_<n> IS 26 $1
+		FUNC LD__L_,_<n> IS 2E $1
+		
+		FUNC LD__A_,_\(HL\) IS 7E
+		FUNC LD__B_,_\(HL\) IS 46
+		FUNC LD__C_,_\(HL\) IS 4E
+		FUNC LD__D_,_\(HL\) IS 56
+		FUNC LD__E_,_\(HL\) IS 5E
+		FUNC LD__H_,_\(HL\) IS 66
+		FUNC LD__L_,_\(HL\) IS 6E
+		
+		FUNC LD__\(HL\)_,_A IS 77
+		FUNC LD__\(HL\)_,_B IS 70
+		FUNC LD__\(HL\)_,_C IS 71
+		FUNC LD__\(HL\)_,_D IS 72
+		FUNC LD__\(HL\)_,_E IS 73
+		FUNC LD__\(HL\)_,_H IS 74
+		FUNC LD__\(HL\)_,_L IS 75
+		
+		FUNC LD__\(HL\)_,_<n> IS 36 $1
+		
+		FUNC LD__A_,_\(BC\) IS 0A
+		
+		FUNC LD__A_,_\(DE\) IS 1A
+		
+		FUNC LD__A_,_\(<nn>\) IS 3A $2 $1
+		
+		FUNC LD__\(BC\)_,_A IS 02
+		
+		FUNC LD__\(DE\)_,_A IS 12
+		
+		FUNC LD__\(<nn>\)_,_A IS 32 $2 $1
+	
+	</8 Bit Load Group>
+	
+	
+	<16 Bit Load Group>
+	
+		FUNC LD__BC_,_<nn> IS 01 $2 $1
+		FUNC LD__DE_,_<nn> IS 11 $2 $1
+		FUNC LD__HL_,_<nn> IS 21 $2 $1
+		FUNC LD__SP_,_<nn> IS 31 $2 $1
+		
+		FUNC LD__BC_,_\(<nn>\) IS 4B $2 $1
+		FUNC LD__DE_,_\(<nn>\) IS 5B $2 $1
+		FUNC LD__HL_,_\(<nn>\) IS 6B $2 $1
+		FUNC LD__SP_,_\(<nn>\) IS 7B $2 $1
+		
+		FUNC LD__\(<nn>\)_,_BC IS 43 $2 $1
+		FUNC LD__\(<nn>\)_,_DE IS 53 $2 $1
+		FUNC LD__\(<nn>\)_,_HL IS 63 $2 $1
+		FUNC LD__\(<nn>\)_,_SP IS 73 $2 $1
+		
+		FUNC LD__HL_,_\(<nn>\) IS 2A $2 $1
+		
+		FUNC LD__\(<nn>\)_,_HL IS 22 $2 $1
+		
+		FUNC LD__SP_,_HL IS F9
+		
+		FUNC PUSH__AF IS F5
+		FUNC PUSH__BC IS C5
+		FUNC PUSH__DE IS D5
+		FUNC PUSH__HL IS E5
+		
+		FUNC POP__AF IS F1
+		FUNC POP__BC IS C1
+		FUNC POP__DE IS D1
+		FUNC POP__HL IS E1
+	
+	</16 Bit Load Group>
+	
+	
+	<8 Bit Logical Group>
+	
+		FUNC AND__A IS A7
+		FUNC AND__B IS A0
+		FUNC AND__C IS A1
+		FUNC AND__D IS A2
+		FUNC AND__E IS A3
+		FUNC AND__H IS A4
+		FUNC AND__L IS A5
+		
+		FUNC AND__<n> IS E6 $1
+		
+		FUNC AND__\(HL\) IS A6
+		
+		FUNC OR__A IS B7
+		FUNC OR__B IS B0
+		FUNC OR__C IS B1
+		FUNC OR__D IS B2
+		FUNC OR__E IS B3
+		FUNC OR__H IS B4
+		FUNC OR__L IS B5
+		
+		FUNC OR__<n> IS F6 $1
+		
+		FUNC OR__\(HL\) IS B6
+		
+		FUNC XOR__A IS AF
+		FUNC XOR__B IS A8
+		FUNC XOR__C IS A9
+		FUNC XOR__D IS AA
+		FUNC XOR__E IS AB
+		FUNC XOR__H IS AC
+		FUNC XOR__L IS AD
+		
+		FUNC XOR__<n> IS EE $1
+		
+		FUNC XOR__\(HL\) IS AE
+		
+		FUNC CP__A IS BF
+		FUNC CP__B IS B8
+		FUNC CP__C IS B9
+		FUNC CP__D IS BA
+		FUNC CP__E IS BB
+		FUNC CP__H IS BC
+		FUNC CP__L IS BD
+		
+		FUNC CP__<n> IS FE $1
+		
+		FUNC CP__\(HL\) IS BE
+		
+		FUNC INC__A IS 3C
+		FUNC INC__B IS 04
+		FUNC INC__C IS 0C
+		FUNC INC__D IS 14
+		FUNC INC__E IS 1C
+		FUNC INC__H IS 24
+		FUNC INC__L IS 2C
+		
+		FUNC INC__\(HL\) IS 34
+		
+		FUNC DEC__A IS 3D
+		FUNC DEC__B IS 05
+		FUNC DEC__C IS 0D
+		FUNC DEC__D IS 15
+		FUNC DEC__E IS 1D
+		FUNC DEC__H IS 25
+		FUNC DEC__L IS 2D
+		
+		FUNC DEC__\(HL\) IS 35
+	
+	</8 Bit Logical Group>
+	
+	
+	<Rotate and Shift Group>
+	
+		FUNC RLC__A IS 07
+		
+		FUNC RL__A IS 17
+		
+		FUNC RRC__A IS 0F
+		
+		FUNC RR__A IS 1F
+		
+		FUNC SLA__A IS CB 27
+		
+		FUNC SRA__A IS CB 2F
+		
+		FUNC SRL__A IS CB 3F
+	
+	</Rotate and Schift Group>
+	
+	
+	<Jump Group>
+	
+		FUNC JP__<nn> IS C3 $2 $1
+		
+		FUNC JP__C_,_<nn> IS DA $2 $1
+		
+		FUNC JP__NC_,_<nn> IS D2 $2 $1
+		
+		FUNC JP__Z_,_<nn> IS CA $2 $1
+		
+		FUNC JP__NZ_,_<nn> IS C2 $2 $1
+		
+		FUNC JP__PE_,_<nn> IS EA $2 $1
+		
+		FUNC JP__PO_,_<nn> IS E2 $2 $1
+		
+		FUNC JP__M_,_<nn> IS FA $2 $1
+		
+		FUNC JP__P_,_<nn> IS F2 $2 $1
+		
+		FUNC JP (HL) IS E9
+	
+	</Jump Group>
+	
+	
+	<General Purpose Group>
+	
+		FUNC DAA IS 27
+		
+		FUNC CPL IS 2F
+		
+		FUNC CCF IS 3F
+
+		FUNC SCF IS 37
+		
+		FUNC NOP IS 00
+		
+		FUNC HALT IS 76
+		
+		FUNC DI IS F3
+		
+		FUNC EI IS FB
+	
+	</General Purpose Group>
+	
+	
+	<Exchange Group>
+	
+		FUNC EX__DE_,_HL IS EB
+		
+		FUNC EX__\(SP\)_,_HL IS E3
+	
+	</Exchange Group>
+	
+	
+	<Call and Return Group>
+	
+		FUNC CALL__<nn> IS CD $2 $1
+		
+		FUNC CALL__C_,_<nn> IS DC $2 $1
+		
+		FUNC CALL__NC_,_<nn> IS D4 $2 $1
+		
+		FUNC CALL__Z_,_<nn> IS CC $2 $1
+		
+		FUNC CALL__NZ_,_<nn> IS C4 $2 $1
+		
+		FUNC CALL__PE_,_<nn> IS EC $2 $1
+		
+		FUNC CALL__PO_,_<nn> IS E4 $2 $1
+		
+		FUNC CALL__M_,_<nn> IS FC $2 $1
+		
+		FUNC CALL__P_,_<nn> IS F4 $2 $1
+		
+		FUNC RET IS C9
+		
+		FUNC RET__C IS D8
+		
+		FUNC RET__NC IS D0
+		
+		FUNC RET__Z IS C8
+		
+		FUNC RET__NZ IS C0
+		
+		FUNC RET__PE IS E8
+		
+		FUNC RET__PO IS E0
+		
+		FUNC RET__M IS F8
+		
+		FUNC RET__P IS F0
+	
+	</Call and Return Group>
+	
+	
+	<Restart Group>
+	
+		FUNC RST__00[hH]? IS C7
+		
+		FUNC RST__08[hH]? IS CF
+		
+		FUNC RST__10[hH]? IS D7
+		
+		FUNC RST__18[hH]? IS DF
+		
+		FUNC RST__20[hH]? IS E7
+		
+		FUNC RST__28[hH]? IS EF
+		
+		FUNC RST__30[hH]? IS F7
+		
+		FUNC RST__38[hH]? IS FF
+	
+	</Restart Group>
+	
+</Z80 instructions>
